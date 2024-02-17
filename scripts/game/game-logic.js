@@ -23,7 +23,7 @@ export const gameLogic = () => {
 			answers: [],
 			points: 0,
 			bonus: 1,
-			timer: 2
+			timer: 60
 		}
 
 		const timer = () => {
@@ -47,53 +47,64 @@ export const gameLogic = () => {
 			if (isRight && gameOptions.lvl < 9) lvlLogic(++gameOptions.lvl)
 			if (isRight && gameOptions.bonus < 5) bonusLogic(++gameOptions.bonus)
 			if (!isRight && gameOptions.bonus > 1) bonusLogic(--gameOptions.bonus)
+			if (isRight) {
+				const points = gameOptions.points + 22 * gameOptions.bonus
+				gameOptions.points = points
+				pointsLogic(points)
+			}
 			gameOptions.answers.push(isRight)
-			isRight ? pointsLogic(++gameOptions.points) : null
 
-			if (gameOptions.timer > 0) hideNumbers()
-			else {  }
-		} // callback, который выполняется при правильном клике на число
+			hideNumbers()
+		} // callback, который выполняется при клике на число
 
 		const gameObject = Game.getGameObject(gameOptions.lvl)
 		// Создаем объект с числами и искомым числом в зависимости от уровня
 		const gameNumbers = Game.getGameNumbers(gameObject, gameOptions.lvl, choice)
 		// Создаем на основе gameObject node элемент панели, со всеми слушателями событий
-		const [gameNode, requiredNumber, requiredNumberWrapper] = Game.getGameNode(gameObject, panel, gameNumbers)
+		const [gameNode, requiredNumberWrapper] = Game.getGameNode(gameObject, panel, gameNumbers)
 		// Создаем саму game node, прокидывая туда gameNumbers и panel
 
 		const hideNumbers = () => {
 			delPrevGame()
+			// Удаляем прк=едыдущую игру
 
 			const nextGameObject = Game.getGameObject(gameOptions.lvl)
 			const nextGameNumbers = Game.getGameNumbers(nextGameObject, gameOptions.lvl, choice)
-
 			const nextRequiredValue = new DOMParser().parseFromString(
 			`<span 
 						class="game__required-number-value ${gameOptions.lvl > 5 ? 'game__required-number-value-little' : ''}"
 						>${ nextGameObject[1] }
 					</span>`,
 			'text/html').querySelector('span')
+			// Создаем новую игру
 
 			requiredNumberWrapper.appendChild(nextRequiredValue)
 			gameNode.appendChild(nextGameNumbers)
 
 			setTimeout(() => nextGameNumbers.classList.add('show-numbers__wrapper'))
 			setTimeout(() => nextRequiredValue.classList.add('show-game__required-number-value'))
+
+			// Добавляем все на страницу и анимируем переход
 		}
 		gameContainer.appendChild(gameNode)
 		// Здесь добавляем gameNode в gameContainer
-	}
+	} // Функция создана, чтобы скрыть предыдущую игру и показать новую
 
 	const startGame = () => {
 		const [timerNode, timerCountDown] = timer(gameProcess)
+		// Ставим тут таймер (3 секундный)
 
 		clearContainer(gameContainer)
+		// Очищаем контейнер
 
 		gameContainer.appendChild(timerNode)
+		// Добавляем туда таймер
 
 		changeContainerBackground(gameContainer)
+		// Меняем цвет фона
 
 		timerCountDown()
+		// Запускаем таймер
 	}
 
 	const startEducation = () => {
@@ -113,11 +124,20 @@ export const gameLogic = () => {
 
 	const gameOver = gameTotal => {
 		gameContainer.className = 'game__container'
+		// Сбрасываем класс для главного контейнера
 		clearContainer(gameContainer)
+		// Очищаем содержимое
 
-		const totalNode = createTotal(gameTotal)
+		const { node, buttons } = createTotal(gameTotal)
+		// Эта функция возращает страницу отчета и кнопки внутри страницы, которые перезапускают игру
 
-		gameContainer.appendChild(totalNode)
+		const [reload, onMainPage] = buttons
+
+		reload.addEventListener('click', startEducation)
+		onMainPage.addEventListener('click', () => { clearContainer(gameContainer); gameLogic() })
+		// Тут диструктуризировали кнопки и навешали callback функции с перезапусками игры
+		gameContainer.appendChild(node)
+		// и добавили соответственно в главный контейнер
 	}
 
 	startGameBtn.addEventListener('click', startEducation)

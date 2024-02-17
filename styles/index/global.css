@@ -41,7 +41,7 @@ button {
   z-index: 1;
 }
 .error-sign-wrapper img {
-  height: 80px;
+  height: 100px;
 }
 
 .arm-pointer {
@@ -547,6 +547,55 @@ button {
     transform: scale(1);
   }
 }
+.green-style {
+  background-color: #94c94d;
+}
+
+.blue-style {
+  background-color: #4db8ec;
+}
+
+.violet-style {
+  background-color: #8e3dcb;
+}
+
+.pink-style {
+  background-color: #fc73b0;
+}
+
+.orange-style {
+  background-color: #f28e37;
+}
+
+.smooth-animation {
+  transition: 0.3s;
+}
+
+.education-number, .game-number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 32px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-family: Montserrat-bold, "Open Sans", sans-serif;
+  position: relative;
+}
+.education-number:hover, .game-number:hover {
+  box-shadow: 0 0 15px #4d4d4d;
+}
+.education-number .game-arm-wrapper, .game-number .game-arm-wrapper {
+  z-index: 99;
+  position: absolute;
+  bottom: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.education-number .game-arm-wrapper img, .game-number .game-arm-wrapper img {
+  height: 80px;
+}
+
 .game__total {
   flex-grow: 1;
   display: flex;
@@ -582,7 +631,48 @@ button {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: linear-gradient(271deg, rgba(168, 129, 253, 0.53), #5900b1) !important;
+  background-image: linear-gradient(271deg, rgba(168, 129, 253, 0.53), #5900b1);
+}
+
+.game__total-info-list {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.game__total-info-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.game__total-info-name {
+  color: #a9a9a9;
+  font-size: 18px;
+}
+
+.game__total-buttons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.game__total-button,
+.game__total-button {
+  padding: 20px 28px;
+  border-radius: 20px;
+  border: 2px solid #8f4af9;
+  font-size: 18px;
+  text-transform: uppercase;
+  color: #8f4af9;
+  transition: 0.3s;
+}
+.game__total-button:hover,
+.game__total-button:hover {
+  background-color: #8f4af9;
+  color: #fff;
 }
 
 /*# sourceMappingURL=global.css.map */

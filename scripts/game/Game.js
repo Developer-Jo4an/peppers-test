@@ -47,8 +47,7 @@ export class Game {
         gameNode.appendChild(gamePanel)
         gameNode.appendChild(gameNumbers)
 
-        return [gameNode, requiredNumber, requiredNumberWrapper]
-
+        return [gameNode, requiredNumberWrapper]
     }
     static getGamePanel() {
         const gamePanelNode = new DOMParser().parseFromString(`
@@ -144,25 +143,9 @@ export class Game {
             numberNode.innerHTML =`<div class="game-number-value">${number.toString()}</div>`
             // Добавляем само число внутрь numberNode
 
-            numberNode.addEventListener('click', e => {
-                if (number !== required) {
-	                const clickCoordinatesX = e.layerX
-	                const clickCoordinatesY = e.layerY
-	                // Здесь мы получаем из объекта event координаты клика пользователя относительно number node
+            numberNode.addEventListener('click', () => choice(number === required))
+            // Добавляем слушатель события
 
-	                const errorPointer = createErrorPointer(clickCoordinatesX, clickCoordinatesY)
-	                // Создаем error pointer
-
-	                numberNode.appendChild(errorPointer)
-	                // Добавляем error pointer в number Node
-
-	                setTimeout(() => errorPointer.remove(), 1000)
-	                // Удаляем error pointer, чтобы он не остался на страницу
-
-	                choice(false)
-                }
-	            choice(true)
-            })
             randomNumbersWrapper.appendChild(numberNode)
             // Добавляем number node во wrapper
         })

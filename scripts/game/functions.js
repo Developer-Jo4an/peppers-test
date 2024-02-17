@@ -125,17 +125,17 @@ export const createHeadband = () => {
     const startGameBtn = headBand.querySelector('button')
 
     return [headBand, startGameBtn]
-}
+} // Эта функция создаем приветственное окно
 
 export const createTotal = gameTotal => {
 	const { answers, points } = gameTotal
 
 	const answersLength = answers.length
-	const rightAnswersCount = answers.filter(answer => answer).length
+	const rightAnswersCount = answers.filter(answer => answer === true).length
 
-	const rightPercent = (rightAnswersCount / answersLength) * 100
+	const rightPercent = ((rightAnswersCount / answersLength) * 100).toFixed(1)
 
-	return new DOMParser().parseFromString(`
+	const totalNode =  new DOMParser().parseFromString(`
 		<div class="game__total">
 			<div class="game__total-header">
 				<img class="game__total-header-img" src="../../assets/start-slide/start-slide-header-background.svg" alt="game__total-header-img">
@@ -153,7 +153,7 @@ export const createTotal = gameTotal => {
 				</li>
 				<li class="game__total-info-item">
 					<div class="game__total-info-name">Точность ответов</div>
-					<div class="game__total-info-item-value">${rightPercent}%</div>
+					<div class="game__total-info-item-value">${isNaN(rightPercent) ? 0 : rightPercent}%</div>
 				</li>
 			</ul>
 			<div class="game__total-buttons">
@@ -162,7 +162,11 @@ export const createTotal = gameTotal => {
 			</div>
 		</div> 
 	`, 'text/html').querySelector('div')
-}
+
+    const totalNodeButtons = [...totalNode.querySelectorAll('.game__total-button')]
+
+    return { node: totalNode, buttons: totalNodeButtons }
+} // Эта функция создет total node
 
 export const delPrevGame = () => {
 	const requiredNumber = document.querySelector('.game__required-number-value')
@@ -175,4 +179,4 @@ export const delPrevGame = () => {
 		requiredNumber.remove()
 		numbersWrapper.remove()
 	}, 300)
-}
+} // Эта функция удаляет предыдущую игру
