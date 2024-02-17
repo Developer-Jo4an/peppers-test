@@ -1,4 +1,11 @@
-import { changeContainerBackground, clearContainer, createHeadband, timer } from './functions.js'
+import {
+	changeContainerBackground,
+	clearContainer,
+	createHeadband,
+	createTotal,
+	delPrevGame,
+	timer
+} from './functions.js'
 import { EducationGame } from './EducationGame.js'
 import { Game } from './Game.js'
 
@@ -16,8 +23,17 @@ export const gameLogic = () => {
 			answers: [],
 			points: 0,
 			bonus: 1,
-			timer: 60
+			timer: 2
 		}
+
+		const timer = () => {
+			if (gameOptions.timer > 0) {
+				setTimeout(() => { timerLogic(--gameOptions.timer); timer() }, 1000)
+			} else {
+				gameOver(gameOptions)
+			}
+		}; timer()
+		// Тут заводим таймер, который рекурсивно считается
 
 		const { panel, timerLogic, lvlLogic, pointsLogic, bonusLogic } = Game.getGamePanel()
 		// Создаем game panel и деструктурируем саму панель и функции, которые меняют ее состояние, как же не хватает React :()
@@ -27,39 +43,35 @@ export const gameLogic = () => {
 		bonusLogic(gameOptions.bonus)
 		// Заводим изначальное состояние панели с помощью функций
 
-		const rightChoice = () => {
-			if (gameOptions.lvl < 9) lvlLogic(++gameOptions.lvl)
-			if (gameOptions.bonus < 5) bonusLogic(++gameOptions.bonus)
-			gameOptions.answers.push(true)
-			pointsLogic(++gameOptions.points)
+		const choice = isRight => {
+			if (isRight && gameOptions.lvl < 9) lvlLogic(++gameOptions.lvl)
+			if (isRight && gameOptions.bonus < 5) bonusLogic(++gameOptions.bonus)
+			if (!isRight && gameOptions.bonus > 1) bonusLogic(--gameOptions.bonus)
+			gameOptions.answers.push(isRight)
+			isRight ? pointsLogic(++gameOptions.points) : null
 
-			hideNumbers()
+			if (gameOptions.timer > 0) hideNumbers()
+			else {  }
 		} // callback, который выполняется при правильном клике на число
 
 		const gameObject = Game.getGameObject(gameOptions.lvl)
 		// Создаем объект с числами и искомым числом в зависимости от уровня
-		const gameNumbers = Game.getGameNumbers(gameObject, gameOptions.lvl, rightChoice)
+		const gameNumbers = Game.getGameNumbers(gameObject, gameOptions.lvl, choice)
 		// Создаем на основе gameObject node элемент панели, со всеми слушателями событий
 		const [gameNode, requiredNumber, requiredNumberWrapper] = Game.getGameNode(gameObject, panel, gameNumbers)
 		// Создаем саму game node, прокидывая туда gameNumbers и panel
 
 		const hideNumbers = () => {
-			const requiredNumber = document.querySelector('.game__required-number-value')
-			const numbersWrapper = document.querySelector('.game-numbers__wrapper')
-
-			requiredNumber.classList.add('hide-game__required-number-value')
-			numbersWrapper.classList.add('hide-numbers__wrapper')
-
-			setTimeout(() => {
-				requiredNumber.remove()
-				numbersWrapper.remove()
-			}, 300)
+			delPrevGame()
 
 			const nextGameObject = Game.getGameObject(gameOptions.lvl)
-			const nextGameNumbers = Game.getGameNumbers(nextGameObject, gameOptions.lvl, rightChoice)
+			const nextGameNumbers = Game.getGameNumbers(nextGameObject, gameOptions.lvl, choice)
 
 			const nextRequiredValue = new DOMParser().parseFromString(
-				`<span class="game__required-number-value">${ nextGameObject[1] }</span>`,
+			`<span 
+						class="game__required-number-value ${gameOptions.lvl > 5 ? 'game__required-number-value-little' : ''}"
+						>${ nextGameObject[1] }
+					</span>`,
 			'text/html').querySelector('span')
 
 			requiredNumberWrapper.appendChild(nextRequiredValue)
@@ -68,17 +80,6 @@ export const gameLogic = () => {
 			setTimeout(() => nextGameNumbers.classList.add('show-numbers__wrapper'))
 			setTimeout(() => nextRequiredValue.classList.add('show-game__required-number-value'))
 		}
-		// Функция, которая скрывает
-
-		const timer = () => {
-			if (gameOptions.timer > 1) {
-				setTimeout(() => { timerLogic(--gameOptions.timer); timer() }, 1000)
-			} else {
-				alert('Время вышло')
-			}
-		}; timer()
-		// Тут заводим таймер, который рекурсивно считается
-
 		gameContainer.appendChild(gameNode)
 		// Здесь добавляем gameNode в gameContainer
 	}
@@ -108,6 +109,15 @@ export const gameLogic = () => {
 
 		gameContainer.appendChild(educationGameNode)
 		// Добавили education main-game внутрь main-game container
+	}
+
+	const gameOver = gameTotal => {
+		gameContainer.className = 'game__container'
+		clearContainer(gameContainer)
+
+		const totalNode = createTotal(gameTotal)
+
+		gameContainer.appendChild(totalNode)
 	}
 
 	startGameBtn.addEventListener('click', startEducation)

@@ -38,6 +38,7 @@ button {
   top: var(--y);
   left: var(--x);
   transform: translate(-50%, -50%);
+  z-index: 1;
 }
 .error-sign-wrapper img {
   height: 80px;
@@ -389,7 +390,7 @@ button {
 }
 
 .game__required-number-title {
-  font-size: 20px;
+  font-size: 18px;
   font-family: Montserrat-bold, sans-serif;
   color: #fff;
   text-transform: uppercase;
@@ -400,34 +401,46 @@ button {
   color: #fff;
   font-family: Montserrat-bold, "Open Sans", sans-serif;
   transition: 0.3s;
-  transform: translateX(1200px);
+  position: absolute;
+  right: -1200px;
+  top: 20.5px;
 }
 
 .show-game__required-number-value {
-  transform: translateX(0);
+  right: 20px;
 }
 
 .hide-game__required-number-value {
-  transform: translateX(-1200px);
+  right: 1200px;
+}
+
+.game__required-number-value-little {
+  font-size: 32px;
+  top: 31.5px;
 }
 
 .game-numbers__wrapper {
   width: 485px;
-  height: 206px;
+  height: 252px;
   display: grid;
   grid-template-columns: var(--columns);
   grid-template-rows: var(--rows);
   gap: var(--gap);
-  transform: translateX(1200px);
+  position: absolute;
+  bottom: 60px;
+  left: 1200px;
   transition: 0.3s;
+}
+.game-numbers__wrapper div {
+  font-size: var(--font-size) !important;
 }
 
 .show-numbers__wrapper {
-  transform: translateX(0);
+  left: calc(50% - 242.5px);
 }
 
 .hide-numbers__wrapper {
-  transform: translateX(-1200px);
+  left: -1200px;
 }
 
 .game-panel__container {
@@ -484,6 +497,92 @@ button {
 
 .active-bonus-circle {
   background-color: #000;
+}
+
+.animation-rotation div {
+  animation: rotation 0.8s infinite linear;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(25deg);
+  }
+  75% {
+    transform: rotate(-25deg);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+.animation-opacity {
+  animation: opacity 0.8s infinite linear;
+}
+
+@keyframes opacity {
+  0% {
+    opacity: 1;
+  }
+  66% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.animation-size {
+  animation: size 0.8s infinite linear;
+}
+
+@keyframes size {
+  0% {
+    transform: scale(1);
+  }
+  66% {
+    transform: scale(0.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.game__total {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 60px 0;
+}
+
+.game__total-header {
+  width: 632px;
+  height: 120px;
+  position: relative;
+}
+.game__total-header img {
+  width: 100%;
+  height: 100%;
+}
+
+.game__total-header-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 32px;
+  color: #fff;
+  z-index: 1;
+}
+
+.game__total-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: linear-gradient(271deg, rgba(168, 129, 253, 0.53), #5900b1) !important;
 }
 
 /*# sourceMappingURL=global.css.map */

@@ -1,0 +1,50 @@
+.animation-rotation {
+    div { animation: rotation 0.8s infinite linear }
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0);
+    }
+    25% {
+        transform: rotate(25deg)
+    }
+    75% {
+        transform: rotate(-25deg);
+    }
+    100% {
+        transform: translate(0);
+    }
+}
+
+.animation-opacity {
+    animation: opacity 0.8s infinite linear;
+}
+
+@keyframes opacity {
+    0% {
+        opacity: 1;
+    }
+    66% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.animation-size {
+    animation: size 0.8s infinite linear;
+}
+
+@keyframes size {
+    0% {
+        transform: scale(1);
+    }
+    66% {
+        transform: scale(0.5);
+    }
+    100% {
+        transform: scale(1);
+    }
+}

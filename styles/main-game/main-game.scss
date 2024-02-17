@@ -32,7 +32,7 @@
 }
 
 .game__required-number-title {
-    font-size: 20px;
+    font-size: 18px;
 
     font-family: Montserrat-bold, sans-serif;
 
@@ -50,35 +50,45 @@
 
     transition: .3s;
 
-    transform: translateX(1200px);
+    position: absolute;
+    right: -1200px;
+    top: 20.5px;
 }
 .show-game__required-number-value {
-    transform: translateX(0);
+    right: 20px;
 }
 .hide-game__required-number-value {
-    transform: translateX(-1200px);
+    right: 1200px;
+}
+.game__required-number-value-little {
+    font-size: 32px;
+    top: 31.5px;
 }
 
 // numbers wrapper
 .game-numbers__wrapper {
     width: 485px;
-    height: 206px;
+    height: 252px;
 
     display: grid;
     grid-template-columns: var(--columns);
     grid-template-rows: var(--rows);
     gap: var(--gap);
 
-    transform: translateX(1200px);
+    position: absolute;
+    bottom: 60px;
+    left: 1200px;
 
     transition: .3s;
+
+    div { font-size: var(--font-size) !important }
 }
 
 .show-numbers__wrapper {
-    transform: translateX(0);
+    left: calc(50% - 242.5px);
 }
 .hide-numbers__wrapper {
-    transform: translateX(-1200px);
+    left: -1200px;
 }
 
 .game-number {

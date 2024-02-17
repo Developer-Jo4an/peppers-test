@@ -7,7 +7,7 @@ export const clearContainer = container => {
 
 export const changeContainerBackground = (container, isSmooth = false) => {
     // Функция, которая меняет цвет контейнера
-    container.className = `game__container ${COLORS.randomColor()}-style ${isSmooth ? 'smooth-animation' : ''}`
+    container.className = `game__container ${ COLORS.randomColor() }-style ${isSmooth ? 'smooth-animation' : ''}`
 }
 
 export const createArmPointer = () => {
@@ -125,4 +125,54 @@ export const createHeadband = () => {
     const startGameBtn = headBand.querySelector('button')
 
     return [headBand, startGameBtn]
+}
+
+export const createTotal = gameTotal => {
+	const { answers, points } = gameTotal
+
+	const answersLength = answers.length
+	const rightAnswersCount = answers.filter(answer => answer).length
+
+	const rightPercent = (rightAnswersCount / answersLength) * 100
+
+	return new DOMParser().parseFromString(`
+		<div class="game__total">
+			<div class="game__total-header">
+				<img class="game__total-header-img" src="../../assets/start-slide/start-slide-header-background.svg" alt="game__total-header-img">
+				<div class="game__total-header-label">Ваши результаты</div>
+				<div class="game__total-background"></div>
+			</div>
+			<ul class="game__total-info-list">
+				<li class="game__total-info-item">
+					<div class="game__total-info-name">Текущий результат</div>
+					<div class="game__total-info-item-value">${points}</div>
+				</li>
+				<li class="game__total-info-item">
+					<div class="game__total-info-name">Верных ответов</div>
+					<div class="game__total-info-item-value">${rightAnswersCount} из ${answersLength}</div>
+				</li>
+				<li class="game__total-info-item">
+					<div class="game__total-info-name">Точность ответов</div>
+					<div class="game__total-info-item-value">${rightPercent}%</div>
+				</li>
+			</ul>
+			<div class="game__total-buttons">
+				<button class="game__total-button">Повторить</button>
+				<button class="game__total-button">На главный экран</button>
+			</div>
+		</div> 
+	`, 'text/html').querySelector('div')
+}
+
+export const delPrevGame = () => {
+	const requiredNumber = document.querySelector('.game__required-number-value')
+	const numbersWrapper = document.querySelector('.game-numbers__wrapper')
+
+	requiredNumber.classList.add('hide-game__required-number-value')
+	numbersWrapper.classList.add('hide-numbers__wrapper')
+
+	setTimeout(() => {
+		requiredNumber.remove()
+		numbersWrapper.remove()
+	}, 300)
 }

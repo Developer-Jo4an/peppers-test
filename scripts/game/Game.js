@@ -1,4 +1,4 @@
-import { COLORS, WRAPPER_SETTINGS } from './constants.js'
+import { ANIMATIONS, COLORS, WRAPPER_SETTINGS } from './constants.js'
 import { createErrorPointer } from './functions.js'
 
 export class Game {
@@ -118,16 +118,16 @@ export class Game {
         }
     }
 
-    static getGameNumbers(gameObject, lvl, rightChoice) {
+    static getGameNumbers(gameObject, lvl, choice) {
         const [numbers, required] = gameObject
 
-        const { gap, columns, rows } = WRAPPER_SETTINGS[lvl.toString()]
+        const { gap, columns, rows, fontSize } = WRAPPER_SETTINGS[lvl.toString()]
         // Возвращаем настройку стилей wrapper, который содержит числа, в качестве ключа указываем lvl
 
         const randomNumbersWrapper = new DOMParser().parseFromString(`
 			<div 
 				class="game-numbers__wrapper" 
-				style="--gap: ${gap}; --columns: ${columns}; --rows: ${rows}"
+				style="--gap: ${gap}; --columns: ${columns}; --rows: ${rows}; --font-size: ${fontSize}"
 			></div>
 		`, 'text/html').querySelector('div')
         setTimeout(() => randomNumbersWrapper.classList.add('show-numbers__wrapper'))
@@ -138,34 +138,31 @@ export class Game {
             const numberNode = document.createElement('div')
             // Создаем dom node числа
 
-            const randomColor = COLORS.randomColor()
-            // Метод randomColor возвращает строку, например: 'violet', эту строку мы используем в качестве создания класса для dom node числа
-            // Строка цвета рандомная
+            numberNode.className = `game-number ${ COLORS.randomColor() }-style ${lvl > 2 ? ANIMATIONS.randomAnimation() : ''}`
+            // Устанавливаем в numberNode общий класс random-number и классы, отвечающий за цвет фона и анимацию, если уровень > 2
 
-            numberNode.className = `game-number ${ randomColor }-style`
-            // Устанавливаем в numberNode общий класс random-number и класс, отвечающий за цвет фона ${randomColor}-style
-
-            numberNode.innerHTML = number.toString()
+            numberNode.innerHTML =`<div class="game-number-value">${number.toString()}</div>`
             // Добавляем само число внутрь numberNode
 
             numberNode.addEventListener('click', e => {
-                if (number === required) rightChoice()
-                else {
-                    const clickCoordinatesX = e.layerX
-                    const clickCoordinatesY = e.layerY
-                    // Здесь мы получаем из объекта event координаты клика пользователя относительно number node
+                if (number !== required) {
+	                const clickCoordinatesX = e.layerX
+	                const clickCoordinatesY = e.layerY
+	                // Здесь мы получаем из объекта event координаты клика пользователя относительно number node
 
-                    const errorPointer = createErrorPointer(clickCoordinatesX, clickCoordinatesY)
-                    // Создаем error pointer
+	                const errorPointer = createErrorPointer(clickCoordinatesX, clickCoordinatesY)
+	                // Создаем error pointer
 
-                    numberNode.appendChild(errorPointer)
-                    // Добавляем error pointer в number Node
+	                numberNode.appendChild(errorPointer)
+	                // Добавляем error pointer в number Node
 
-                    setTimeout(() => errorPointer.remove(), 1000)
-                    // Удаляем error pointer, чтобы он не остался на страницу
+	                setTimeout(() => errorPointer.remove(), 1000)
+	                // Удаляем error pointer, чтобы он не остался на страницу
+
+	                choice(false)
                 }
+	            choice(true)
             })
-
             randomNumbersWrapper.appendChild(numberNode)
             // Добавляем number node во wrapper
         })
