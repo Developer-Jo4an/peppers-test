@@ -1,0 +1,67 @@
+.green-style {
+  background-color: #94c94d;
+}
+
+.blue-style {
+  background-color: #4db8ec;
+}
+
+.violet-style {
+  background-color: #8e3dcb;
+}
+
+.pink-style {
+  background-color: #fc73b0;
+}
+
+.orange-style {
+  background-color: #f28e37;
+}
+
+.smooth-animation {
+  transition: 0.3s;
+}
+
+.game__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 60px 0;
+  position: relative;
+}
+
+.game__required-number {
+  width: 485px;
+  height: 102px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 20px;
+  box-shadow: 0 7px 35px 0 rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.game__required-number-title {
+  font-size: 20px;
+  font-family: Montserrat-bold, sans-serif;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.game__required-number-value {
+  font-size: 50px;
+  color: #fff;
+  font-family: Montserrat-bold, "Open Sans", sans-serif;
+}
+
+.game-panel__container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+/*# sourceMappingURL=main-game.css.map */

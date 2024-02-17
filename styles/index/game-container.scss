@@ -1,0 +1,14 @@
+// main-game container
+
+.game__container {
+    width: 722px;
+    height: 528px;
+
+    display: flex;
+
+    overflow: hidden;
+
+    box-shadow: 0 0 10px #c5c5c5;
+
+    border-radius: 10px;
+}

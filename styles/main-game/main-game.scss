@@ -1,0 +1,148 @@
+@import '../index/variables';
+
+// container
+.main-game__container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 60px 0;
+
+    position: relative;
+}
+
+// header
+
+.game__required-number {
+    width: 485px;
+    height: 102px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 24px 20px;
+    margin-top: 20px;
+
+    box-shadow: 0 7px 35px 0 rgba(0, 0, 0, .3);
+
+    position: relative;
+}
+
+.game__required-number-title {
+    font-size: 20px;
+
+    font-family: Montserrat-bold, sans-serif;
+
+    color: #fff;
+
+    text-transform: uppercase;
+}
+
+.game__required-number-value {
+    font-size: 50px;
+
+    color: #fff;
+
+    font-family: Montserrat-bold, "Open Sans", sans-serif;
+
+    transition: .3s;
+
+    transform: translateX(1200px);
+}
+.show-game__required-number-value {
+    transform: translateX(0);
+}
+.hide-game__required-number-value {
+    transform: translateX(-1200px);
+}
+
+// numbers wrapper
+.game-numbers__wrapper {
+    width: 485px;
+    height: 206px;
+
+    display: grid;
+    grid-template-columns: var(--columns);
+    grid-template-rows: var(--rows);
+    gap: var(--gap);
+
+    transform: translateX(1200px);
+
+    transition: .3s;
+}
+
+.show-numbers__wrapper {
+    transform: translateX(0);
+}
+.hide-numbers__wrapper {
+    transform: translateX(-1200px);
+}
+
+.game-number {
+    @extend %random-number;
+}
+
+// game panel
+
+.game-panel__container {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    display: flex;
+    align-items: center;
+    gap: 60px;
+
+    padding: 10px;
+
+    background-color: rgba(#4d4d4d, 0.6);
+
+    border-bottom-left-radius: 10px;
+}
+
+.game-panel__timer,
+.game-panel__lvl,
+.game-panel__points,
+.game-panel__bonus {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px
+}
+
+.game-panel__title {
+    font-size: 10px;
+
+    text-transform: uppercase;
+}
+
+.game-panel__timer-value,
+.game-panel__lvl-value,
+.game-panel__point-value,
+.game-panel__bonus-value {
+    font-size: 12px;
+}
+
+.game-panel__bonus-value {
+    font-size: 14px;
+    padding-left: 5px;
+}
+
+.game-panel__bonus-circles-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.game-panel__bonus-circle {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+    border: 1px solid #000
+}
+
+.active-bonus-circle { background-color: #000 }

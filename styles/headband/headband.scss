@@ -1,0 +1,110 @@
+@import '../index/variables';
+
+// headband
+.headband__wrapper {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+// header
+.headband__header {
+    background-image: url("../../assets/start-slide/start-slide-header-background.svg");
+}
+
+.headband__header-wrapper {
+    height: 136px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background-image: linear-gradient(271deg, rgba(168, 129, 253, .53), #5900b1) !important;
+}
+
+.headband__title {
+    font-size: 36px;
+
+    font-family: Montserrat-bold, sans-serif;
+
+    color: #fff
+}
+
+.headband__description {
+    font-size: 18px;
+
+    color: #fff
+}
+
+// content
+
+.headband__content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 30px 45px;
+}
+
+.headband__content-title {
+    color: $VIOLET_COLOR;
+
+    font-family: Montserrat-bold, sans-serif;
+}
+
+.headband__content-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px
+}
+
+.headband__content__list-item {
+    display: grid;
+    grid-template-columns: 26px auto;
+    grid-template-rows: auto auto;
+    column-gap: 12px;
+}
+
+.headband__content__list-item-sign {
+    grid-row: span 2;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.headband__content__list-item-title {
+    font-family: Montserrat-bold, sans-serif;
+}
+
+// button
+.headband__start-education-btn {
+    width: 177px;
+    height: 57px;
+
+    border-radius: 30px;
+
+    background-color: $DARK_VIOLET_COLOR;
+
+    font-family: 'Open Sans', sans-serif;
+
+    font-weight: 500;
+
+    color: #fff;
+
+    text-transform: uppercase;
+
+    transition: .2s;
+
+
+    &:hover {
+        background-color: $VIOLET_COLOR;
+
+        box-shadow: 0 0 25px #c4c4c4;
+
+        transform: translateY(-4px)
+    }
+}

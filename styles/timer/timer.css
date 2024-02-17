@@ -1,0 +1,22 @@
+.timer__wrapper {
+  flex-grow: 1;
+  background-color: #888888;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.timer__value {
+  width: 120px;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: #c0c0c0;
+  color: #fff;
+  font-size: 30px;
+  font-family: Montserrat-bold, "Open Sans", sans-serif;
+}
+
+/*# sourceMappingURL=timer.css.map */

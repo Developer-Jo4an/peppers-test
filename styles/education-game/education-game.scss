@@ -1,0 +1,74 @@
+@import '../index/variables';
+
+// container
+.education-game__container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 60px 0;
+
+    position: relative;
+}
+
+// header
+.education-game__required-number {
+    width: 485px;
+    height: 102px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 24px 20px;
+
+    box-shadow: 0 7px 35px 0 rgba(0, 0, 0, .3)
+}
+
+.education-game__required-number-title {
+    font-size: 20px;
+
+    font-family: Montserrat-bold, sans-serif;
+
+    color: #fff;
+
+    text-transform: uppercase;
+}
+
+.education-game__required-number-value {
+    font-size: 50px;
+
+    color: #fff;
+
+    font-family: Montserrat-bold, "Open Sans", sans-serif;
+}
+
+// random education-main-game wrapper
+
+.education-numbers__wrapper {
+    width: 485px;
+    height: 206px;
+
+    display: grid;
+    grid-template-columns: var(--columns);
+    grid-template-rows: var(--rows);
+    gap: var(--gap);
+}
+
+// random number
+.education-number {
+    @extend %random-number;
+}
+
+// education message
+.education-game__message {
+    color: #fff;
+
+    font-family: Montserrat-bold, "Open Sans", sans-serif;
+
+    font-size: 18px;
+
+    white-space: nowrap;
+}
