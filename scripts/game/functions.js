@@ -133,7 +133,7 @@ export const createTotal = gameTotal => {
 	const answersLength = answers.length
 	const rightAnswersCount = answers.filter(answer => answer === true).length
 
-	const rightPercent = ((rightAnswersCount / answersLength) * 100).toFixed(1)
+	let rightPercent = ((rightAnswersCount / answersLength) * 100)
 
 	const totalNode =  new DOMParser().parseFromString(`
 		<div class="game__total">
@@ -153,7 +153,7 @@ export const createTotal = gameTotal => {
 				</li>
 				<li class="game__total-info-item">
 					<div class="game__total-info-name">Точность ответов</div>
-					<div class="game__total-info-item-value">${isNaN(rightPercent) ? 0 : rightPercent}%</div>
+					<div class="game__total-info-item-value">${isNaN(rightPercent) ? 0 : rightPercent.toFixed(1)}%</div>
 				</li>
 			</ul>
 			<div class="game__total-buttons">

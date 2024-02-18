@@ -1,5 +1,4 @@
 import { ANIMATIONS, COLORS, WRAPPER_SETTINGS } from './constants.js'
-import { createErrorPointer } from './functions.js'
 
 export class Game {
     static getGameObject(lvl) {
