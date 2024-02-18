@@ -66,15 +66,16 @@ export const gameLogic = () => {
 
 		const hideNumbers = () => {
 			delPrevGame()
-			// Удаляем прк=едыдущую игру
+			// Удаляем предыдущую игру
 
 			const nextGameObject = Game.getGameObject(gameOptions.lvl)
 			const nextGameNumbers = Game.getGameNumbers(nextGameObject, gameOptions.lvl, choice)
 			const nextRequiredValue = new DOMParser().parseFromString(
 			`<span 
-						class="game__required-number-value ${gameOptions.lvl > 5 ? 'game__required-number-value-little' : ''}"
-						>${ nextGameObject[1] }
-					</span>`,
+					class="game__required-number-value ${gameOptions.lvl > 5 ? 'game__required-number-value-little' : ''}"
+				  >
+					${ nextGameObject[1] }
+				  </span>`,
 			'text/html').querySelector('span')
 			// Создаем новую игру
 

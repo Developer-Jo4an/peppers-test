@@ -1,12 +1,12 @@
 export const COLORS = {
     colorsArray: ['green', 'blue', 'violet', 'pink', 'orange'],
     randomColor() { return this.colorsArray[Math.floor(Math.random() * 5)] }
-}
+} // Данная константа служит для хранения всех цветов и содержит метод, который возвращает случайный цвет
 
 export const ANIMATIONS = {
 	animationsArray: ['animation-rotation', 'animation-opacity', 'animation-size', ''],
 	randomAnimation() { return this.animationsArray[Math.floor(Math.random() * 4)] }
-}
+} // Данная константа служит для хранения анимаций и содержит метод, который возвращает случайную анимацию
 
 export const WRAPPER_SETTINGS = {
     '1': {
@@ -63,4 +63,4 @@ export const WRAPPER_SETTINGS = {
         rows: '1fr 1fr 1fr 1fr 1fr',
 	    fontSize: '18px'
     }
-}
+} // Тут описаны стили для контейнера чисел, в зависимости от уровня

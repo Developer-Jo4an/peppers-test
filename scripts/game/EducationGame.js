@@ -3,8 +3,7 @@ import { createArmPointer, createErrorPointer } from './functions.js'
 
 export class EducationGame {
 	static getEducationObject() {
-		// Данный метод создает массив из шести рандомных (уникальных) элементов в промежутке [1, 10]
-		let numbers = Array.from({ length: 10 }, (_, i) => i + 1)
+		let numbers = Array.from({length: 10}, (_, i) => i + 1)
 
 		for (let i = numbers.length - 1; i > 0; i--) {
 			const j = Math.floor(Math.random() * (i + 1));
@@ -19,7 +18,8 @@ export class EducationGame {
 			numbers: uniqueNumbers,
 			required: requiredNumber
 		}
-	}
+	} // Данный метод создает массив из шести рандомных (уникальных) элементов в промежутке [1, 10]
+
 
 	static getEducationGameNode(educationObject, startGame) {
 		// 1) Данный метод принимает аргументы: объект с уникальными числами и искомым числом, и функцию для запуска старта игры

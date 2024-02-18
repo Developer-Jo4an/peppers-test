@@ -129,11 +129,14 @@ export const createHeadband = () => {
 
 export const createTotal = gameTotal => {
 	const { answers, points } = gameTotal
+    // Тут забираем массив ответов и кол-во набранных очков
 
 	const answersLength = answers.length
 	const rightAnswersCount = answers.filter(answer => answer === true).length
+    // Тут считаем кол-во правильных ответов
 
-	let rightPercent = ((rightAnswersCount / answersLength) * 100)
+	let rightPercent = (rightAnswersCount / answersLength) * 100
+    // С помощью кол-ва правильных ответов и общего кол-ва ответов процент правильных
 
 	const totalNode =  new DOMParser().parseFromString(`
 		<div class="game__total">

@@ -11,18 +11,19 @@ export class Game {
             case 4: case 5: { numCount = 12; numRange = [100, 1000]; break }
             case 6: case 7: { numCount = 16; numRange = [1000, 10000]; break }
             case 8: case 9: { numCount = 25; numRange = [1000, 10000]; break }
-        }
+        } // switch предназначен, чтобы дать воодные данные для будущего массива, исходя из уровня
 
-        let numbers = new Set()
+        let numbers = new Set() // Тут создаем Set, так как огн содержит только уникальные элементы
         while(numbers.size < numCount) {
             numbers.add(Math.floor(Math.random() * (numRange[1] - numRange[0] + 1)) + numRange[0])
-        }
+        } // С помощью цикла добавляем элементы в numbers
 
         let numbersArray = Array.from(numbers)
+        // создаем из Set Array
         let required = numbersArray[Math.floor(Math.random() * numbersArray.length)]
 
         return [numbersArray, required]
-    }
+    } // Данная функция генерирует массив случайных уникальных чисел в зависимости от промежутков
 
     static getGameNode(gameObject, gamePanel, gameNumbers) {
 
